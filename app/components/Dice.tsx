@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
@@ -6,7 +7,7 @@ interface DiceProps {
   number: number;
 }
 
-const Dice: React.FC<DiceProps> = ({ number }) => {
+export default function Dice({ number }: DiceProps) {
   const diceTextures = [
     useLoader(TextureLoader, "/img/sides/1.png"),
     useLoader(TextureLoader, "/img/sides/2.png"),
@@ -25,6 +26,4 @@ const Dice: React.FC<DiceProps> = ({ number }) => {
       <meshBasicMaterial map={currentTexture} />
     </mesh>
   );
-};
-
-export default Dice;
+}
