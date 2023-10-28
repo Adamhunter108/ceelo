@@ -7,8 +7,8 @@ import Six from "./components/die-sides/Six";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gray-800 flex justify-center">
-      <div className="mt-12 space-y-4">
+    <main className="bg-gray-800">
+      <div className="mt-24 flex justify-center space-x-4">
         <p></p>
         <One />
         <Two />
