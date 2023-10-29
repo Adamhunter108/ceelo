@@ -6,14 +6,14 @@ export default function Six() {
   return (
     <div className="">
       <div
-        className={`outline outline-2 h-36 w-36 bg-gray-200  rounded-2xl shadow-x2l transform flex justify-between p-4 hover:scale-150 transition duration-700 hover:rotate-180 hover:shadow-2xl ${randomRotateClass()}`}
+        className={`outline outline-2 h-24 w-24 md:h-32 md:w-32 lg:h-36 lg:w-36 bg-gray-200 rounded-2xl shadow-2xl transform p-2 md:p-3 lg:p-4 hover:scale-150 transition duration-700 hover:rotate-180 hover:shadow-2xl ${randomRotateClass()}`}
       >
-        <div className="absolute w-8 h-8 bg-black rounded-full top-4 left-4"></div>
-        <div className="absolute w-8 h-8 bg-black rounded-full top-4 right-4"></div>
-        <div className="absolute w-8 h-8 bg-black rounded-full bottom-4 left-4"></div>
-        <div className="absolute w-8 h-8 bg-black rounded-full bottom-4 right-4"></div>
-        <div className="absolute w-8 h-8 bg-black rounded-full top-1/2 left-4 transform -translate-y-1/2"></div>
-        <div className="absolute w-8 h-8 bg-black rounded-full top-1/2 right-4 transform -translate-y-1/2"></div>
+        <div className="absolute w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 bg-black rounded-full top-3 left-3 md:top-4 md:left-4 lg:top-4 lg:left-4"></div>
+        <div className="absolute w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 bg-black rounded-full top-3 right-3 md:top-4 md:right-4 lg:top-4 lg:right-4"></div>
+        <div className="absolute w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 bg-black rounded-full bottom-3 left-3 md:bottom-4 md:left-4 lg:bottom-4 lg:left-4"></div>
+        <div className="absolute w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 bg-black rounded-full bottom-3 right-3 md:bottom-4 md:right-4 lg:bottom-4 lg:right-4"></div>
+        <div className="absolute w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 bg-black rounded-full top-1/2 left-3 transform -translate-y-1/2"></div>
+        <div className="absolute w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 bg-black rounded-full top-1/2 right-3 transform -translate-y-1/2"></div>
       </div>
     </div>
   );

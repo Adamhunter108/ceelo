@@ -16,7 +16,6 @@ export default function GameScene() {
         <pointLight position={[10, 10, 10]} />
 
         {/* Add the Dice component here for testing */}
-        {/* For now, you can hardcode a number for the dice */}
         <Dice number={3} />
       </Canvas>
     </div>
