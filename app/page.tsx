@@ -8,11 +8,14 @@ import Six from "./components/die-sides/Six";
 export default function Home() {
   return (
     <main className="bg-gray-800">
-      <div className="mt-24 flex justify-center space-x-4">
+      <div className="mt-24 flex justify-center">
+        <img src="/img/logos/ceelo-logo-2.png" className="w-96" />
+      </div>
+      <div className="-mt-16 flex justify-center space-x-4">
         <p></p>
-        <One />
+        {/* <One />
         <Two />
-        <Three />
+        <Three /> */}
         <Four />
         <Five />
         <Six />
