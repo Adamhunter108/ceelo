@@ -1,9 +1,11 @@
+import Link from "next/link";
 import One from "./components/die-sides/One";
 import Two from "./components/die-sides/Two";
 import Three from "./components/die-sides/Three";
 import Four from "./components/die-sides/Four";
 import Five from "./components/die-sides/Five";
 import Six from "./components/die-sides/Six";
+import ChooseGameMode from "./components/ui/home/ChooseGameMode";
 
 export default function Home() {
   return (
@@ -16,19 +18,15 @@ export default function Home() {
         />
       </div>
       <div className="-mt-10 flex justify-center space-x-4">
-        <One />
-        <Two />
-        <Three />
-        {/* <Four />
+        <Four />
         <Five />
-        <Six /> */}
+        <Six />
       </div>
-      <div className="mt-10 flex justify-center animate-pulse">
-        <p className="text-gray-300">Choose your game mode</p>
+      <div className="mt-4 flex justify-center animate-pulse">
+        <p className="text-gray-300">Choose game mode</p>
       </div>
-      <div className="mt-6 flex justify-center space-x-5">
-        <div className="rounded-full bg-cyan-500 w-20 h-20"></div>
-        <div className="rounded-full bg-cyan-500 w-20 h-20"></div>
+      <div className="mt-6">
+        <ChooseGameMode />
       </div>
     </main>
   );
