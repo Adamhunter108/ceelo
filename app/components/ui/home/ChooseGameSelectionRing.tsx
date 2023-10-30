@@ -11,6 +11,7 @@ export default function ChooseGameSelectionRing({ children }: any) {
         <defs>
           <linearGradient id="selection-gradient">
             <stop offset="0%" style={{ stopColor: "#E1394D" }} />
+            <stop offset="50%" style={{ stopColor: "#E97138" }} />
             <stop offset="100%" style={{ stopColor: "#4FADCA" }} />
           </linearGradient>
         </defs>
