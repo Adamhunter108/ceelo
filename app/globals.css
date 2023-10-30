@@ -25,3 +25,41 @@ body {
     )
     rgb(var(--background-start-rgb));
 } */
+
+/* @keyframes simpleColorChange {
+  0% {
+    background-color: red;
+  }
+  100% {
+    background-color: blue;
+  }
+} */
+
+/* .animate-gradientFlow {
+  animation: simpleColorChange 4s infinite alternate;
+} */
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradientFlow {
+  animation: gradientFlow 6s infinite linear;
+  background: linear-gradient(
+    /* to right, */ 45deg,
+    #e1394d,
+    #e97138,
+    #4fadca,
+    #e1394d,
+    #e97138,
+    #4fadca,
+    #e1394d,
+    #e97138
+  );
+  background-size: 200% 200%;
+}
