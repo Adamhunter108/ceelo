@@ -14,7 +14,7 @@ export default function ChooseGameMode() {
             <ChooseGameSelectionRing>
               <button
                 onClick={() => setSelectedGameMode("freeThrow")}
-                className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold"
+                className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold font-sans"
               >
                 Free throw
               </button>
@@ -25,7 +25,7 @@ export default function ChooseGameMode() {
             <ChooseGameSelectionRingHolder>
               <button
                 onClick={() => setSelectedGameMode("freeThrow")}
-                className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold"
+                className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold font-sans"
               >
                 Free throw
               </button>
@@ -37,7 +37,7 @@ export default function ChooseGameMode() {
             <ChooseGameSelectionRing>
               <button
                 onClick={() => setSelectedGameMode("twoPlayers")}
-                className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold"
+                className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold font-sans"
               >
                 2 players
               </button>
@@ -48,7 +48,7 @@ export default function ChooseGameMode() {
             <ChooseGameSelectionRingHolder>
               <button
                 onClick={() => setSelectedGameMode("twoPlayers")}
-                className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold"
+                className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold font-sans"
               >
                 2 players
               </button>
@@ -66,7 +66,7 @@ export default function ChooseGameMode() {
             <button
               type="button"
               //   className="rounded-full bg-gradient-to-br from-[#E1394D] via-[#E97138] to-[#4FADCA] px-24 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4fadca] animate-gradientFlow"
-              className="rounded-full px-24 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4fadca] animate-gradientFlow"
+              className="rounded-full px-24 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4fadca] animate-gradientFlow font-sans"
             >
               Start
             </button>

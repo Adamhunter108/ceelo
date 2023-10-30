@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Rock_Salt } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+const rockSalt = Rock_Salt({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-rock-salt",
+});
 
 export const metadata: Metadata = {
   title: "Cee Lo",
@@ -16,7 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html className="bg-gray-800" lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} ${rockSalt.className}`}>
+        {children}
+      </body>
     </html>
   );
 }
