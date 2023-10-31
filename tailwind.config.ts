@@ -16,6 +16,6 @@ const config: Config = {
       fontFamily: { mono: ["var(--font-rock-salt)"] },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };
 export default config;

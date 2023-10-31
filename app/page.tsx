@@ -6,7 +6,7 @@ import ChooseGameMode from "./components/ui/home/ChooseGameMode";
 export default function Home() {
   return (
     <main className="bg-gray-800">
-      <div className="mt-1 flex justify-center">
+      <div className="flex justify-center">
         <img
           src="/img/logos/ceelo-logo-1.png"
           className="w-96"
