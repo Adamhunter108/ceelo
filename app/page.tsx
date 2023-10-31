@@ -6,14 +6,14 @@ import ChooseGameMode from "./components/ui/home/ChooseGameMode";
 export default function Home() {
   return (
     <main className="bg-gray-800">
-      <div className="mt-2 flex justify-center">
+      <div className="mt-1 flex justify-center">
         <img
           src="/img/logos/ceelo-logo-1.png"
           className="w-96"
           alt="Cee Lo logo"
         />
       </div>
-      <div className="-mt-10 flex justify-center space-x-4">
+      <div className="-mt-16 flex justify-center space-x-4">
         <Four />
         <Five />
         <Six />
