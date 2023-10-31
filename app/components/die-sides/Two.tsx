@@ -1,6 +1,6 @@
 "use client";
 
-import randomRotateClass from "../../utils/randomRotateClass";
+import { randomRotateClass } from "../../utils/diceUtils";
 
 export default function Two() {
   return (

@@ -16,7 +16,7 @@ export default function ChooseGameMode() {
                 onClick={() => setSelectedGameMode("freeThrow")}
                 className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold font-sans"
               >
-                Free throw
+                Free Throw
               </button>
             </ChooseGameSelectionRing>
           </div>
@@ -27,7 +27,7 @@ export default function ChooseGameMode() {
                 onClick={() => setSelectedGameMode("freeThrow")}
                 className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold font-sans"
               >
-                Free throw
+                Free Throw
               </button>
             </ChooseGameSelectionRingHolder>
           </div>
@@ -39,7 +39,7 @@ export default function ChooseGameMode() {
                 onClick={() => setSelectedGameMode("twoPlayers")}
                 className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold font-sans"
               >
-                2 players
+                2 Players
               </button>
             </ChooseGameSelectionRing>
           </div>
@@ -50,7 +50,7 @@ export default function ChooseGameMode() {
                 onClick={() => setSelectedGameMode("twoPlayers")}
                 className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold font-sans"
               >
-                2 players
+                2 Players
               </button>
             </ChooseGameSelectionRingHolder>
           </div>

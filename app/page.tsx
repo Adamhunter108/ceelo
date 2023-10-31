@@ -19,7 +19,7 @@ export default function Home() {
         <Six />
       </div>
       <div className="mt-4 flex justify-center animate-pulse">
-        <p className="text-gray-300">Choose game mode</p>
+        <p className="text-gray-300 font-mono">Choose game mode</p>
       </div>
       <div className="mt-3">
         <ChooseGameMode />
