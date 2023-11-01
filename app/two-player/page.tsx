@@ -1,10 +1,9 @@
-import EnterPlayerNamesModal from "../components/ui/two-player/EnterPlayerNamesModal";
+import TwoPlayer from "../components/ui/two-player/TwoPlayer";
 
 export default function TwoPlayersPage() {
   return (
     <div>
-      {/* <p className="font-sans text-gray-300">2 player</p> */}
-      <EnterPlayerNamesModal />
+      <TwoPlayer />
     </div>
   );
 }
