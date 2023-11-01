@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import One from "../../die-sides/One";
 import Two from "../../die-sides/Two";
 import Three from "../../die-sides/Three";
@@ -22,8 +23,15 @@ export default function FreeThrow() {
   };
 
   return (
-    <div className="relative h-screen px-4 py-8">
-      <div className="text-center">
+    <div className="relative h-screen">
+      <div className="-mt-10 ml-4">
+        <Link href="/">
+          <div className="text-sm font-semibold leading-7 text-[#4fadca] hover:text-[#4fadca]/70 font-sans">
+            <span aria-hidden="true">&larr;</span> Back
+          </div>
+        </Link>
+      </div>
+      <div className="text-center mt-10">
         <div className="flex justify-center space-x-4">
           {rolls.map((roll, idx) => {
             switch (roll) {

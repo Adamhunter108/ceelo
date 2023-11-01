@@ -29,7 +29,7 @@ export function findScore(roll: number[]): string | null {
 
   const sortedRoll = [...roll].sort((a, b) => a - b);
 
-  if (sortedRoll.join(",") === "1,2,3") return "loss";
+  if (sortedRoll.join(",") === "1,2,3") return "you lose";
   if (sortedRoll.join(",") === "4,5,6") return "Cee Lo";
   if (new Set(sortedRoll).size === 1) return "trips";
 

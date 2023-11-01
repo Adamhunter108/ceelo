@@ -1,14 +1,75 @@
 "use client";
 import { Fragment, useState } from "react";
+import Link from "next/link";
 import { Dialog, Transition } from "@headlessui/react";
+import One from "../../die-sides/One";
+import Two from "../../die-sides/Two";
+import Three from "../../die-sides/Three";
+import Four from "../../die-sides/Four";
+import Five from "../../die-sides/Five";
+import Six from "../../die-sides/Six";
+import { aRollOfTheDice, findScore } from "@/app/utils/diceUtils";
 
 export default function TwoPlayer() {
   const [open, setOpen] = useState<boolean>(false);
+
   const [player1, setPlayer1] = useState<string>("");
   const [player2, setPlayer2] = useState<string>("");
 
+  const [rollsPlayer1, setRollsPlayer1] = useState<number[]>([]);
+  const [rollsPlayer2, setRollsPlayer2] = useState<number[]>([]);
+  const [scorePlayer1, setScorePlayer1] = useState<number | null>(null);
+  const [scorePlayer2, setScorePlayer2] = useState<number | null>(null);
+  const [rollCountPlayer1, setRollCountPlayer1] = useState<number>(0);
+  const [rollCountPlayer2, setRollCountPlayer2] = useState<number>(0);
+  const [currentPlayer, setCurrentPlayer] = useState<string | null>(null);
+  const [winner, setWinner] = useState<string | null>(null);
+  const rollDiceForPlayer = () => {
+    const newRolls = aRollOfTheDice();
+    const newScore = findScore(newRolls);
+
+    const updateScoreAndSwitchPlayer = (
+      scoreSetter: React.Dispatch<React.SetStateAction<number | null>>,
+      rollCount: number,
+      switchToPlayer: string | null
+    ) => {
+      if (
+        rollCount === 2 ||
+        typeof newScore === "number" ||
+        newScore === null
+      ) {
+        scoreSetter(typeof newScore === "string" ? 0 : newScore);
+        setCurrentPlayer(switchToPlayer);
+      }
+    };
+
+    if (currentPlayer === player1) {
+      setRollsPlayer1(newRolls);
+      updateScoreAndSwitchPlayer(setScorePlayer1, rollCountPlayer1, player2);
+      setRollCountPlayer1(rollCountPlayer1 + 1);
+    } else {
+      setRollsPlayer2(newRolls);
+      updateScoreAndSwitchPlayer(setScorePlayer2, rollCountPlayer2, null);
+      setRollCountPlayer2(rollCountPlayer2 + 1);
+    }
+  };
+
+  const determineWinner = () => {
+    // Logic to determine the winner based on scores and game rules
+    // This function will set the 'winner' state variable accordingly
+    // TODO: Implement the winner determination logic
+  };
+
   return (
     <div>
+      <div className="mt-6 ml-4">
+        <Link href="/">
+          <div className="text-sm font-semibold leading-7 text-[#4fadca] hover:text-[#4fadca]/70 font-sans">
+            <span aria-hidden="true">&larr;</span> Back
+          </div>
+        </Link>
+      </div>
+
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={setOpen}>
           <Transition.Child
@@ -87,7 +148,7 @@ export default function TwoPlayer() {
       </Transition.Root>
 
       {player1 && player2 && (
-        <div className="mt-10 flex flex-col items-center">
+        <div className="mt-10 flex flex-col items-center space-y-2">
           <p className="text-white text-3xl">
             <span className="font-sans text-gray-400 text-xl">Player 1: </span>
             {player1}
@@ -97,6 +158,13 @@ export default function TwoPlayer() {
             {player2}
           </p>
         </div>
+      )}
+
+      {currentPlayer === player1 && (
+        <button onClick={rollDiceForPlayer}>Roll Dice (Player 1)</button>
+      )}
+      {currentPlayer === player2 && (
+        <button onClick={rollDiceForPlayer}>Roll Dice (Player 2)</button>
       )}
 
       {!player1 && !player2 && (
