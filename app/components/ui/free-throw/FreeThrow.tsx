@@ -54,7 +54,7 @@ export default function FreeThrow() {
         </div>
         {hasRolled && score && (
           <div>
-            <div className="mt-6 text-center text-2xl text-gray-400 font-sans">
+            <div className="mt-6 text-center text-2xl text-gray-500 font-sans">
               Score:
             </div>
             <div className="mt-6 text-center text-7xl text-gray-200 font-mono">

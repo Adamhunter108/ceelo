@@ -16,6 +16,8 @@ export default function TwoPlayer() {
   const [player1, setPlayer1] = useState<string>("");
   const [player2, setPlayer2] = useState<string>("");
 
+  const [rolls, setRolls] = useState<number[]>(aRollOfTheDice());
+
   const [rollsPlayer1, setRollsPlayer1] = useState<number[]>([]);
   const [rollsPlayer2, setRollsPlayer2] = useState<number[]>([]);
   const [scorePlayer1, setScorePlayer1] = useState<number | null>(null);
@@ -148,23 +150,71 @@ export default function TwoPlayer() {
       </Transition.Root>
 
       {player1 && player2 && (
-        <div className="mt-10 flex flex-col items-center space-y-2">
-          <p className="text-white text-3xl">
-            <span className="font-sans text-gray-400 text-xl">Player 1: </span>
-            {player1}
-          </p>
-          <p className="text-white text-3xl">
-            <span className="font-sans text-gray-400 text-xl">Player 2: </span>
-            {player2}
-          </p>
+        <div className="mt-4 flex justify-center space-x-16">
+          <div className="flex flex-col items-center">
+            <p className="font-sans text-gray-500 text-lg">Player 1</p>
+            <p className="-mt-2 text-white text-3xl -rotate-6 pb-2">
+              {player1}
+            </p>
+          </div>
+          <div className="flex flex-col items-center">
+            <p className="font-sans text-gray-500 text-lg">Player 2</p>
+            <p className="-mt-2 text-white text-3xl -rotate-6">{player2}</p>
+          </div>
         </div>
       )}
 
-      {currentPlayer === player1 && (
-        <button onClick={rollDiceForPlayer}>Roll Dice (Player 1)</button>
+      {player1 && player2 && (
+        <div className="mt-10 flex justify-center space-x-4">
+          {rolls.map((roll, idx) => {
+            switch (roll) {
+              case 1:
+                return <One key={idx} />;
+              case 2:
+                return <Two key={idx} />;
+              case 3:
+                return <Three key={idx} />;
+              case 4:
+                return <Four key={idx} />;
+              case 5:
+                return <Five key={idx} />;
+              case 6:
+                return <Six key={idx} />;
+              default:
+                return null;
+            }
+          })}
+        </div>
       )}
-      {currentPlayer === player2 && (
-        <button onClick={rollDiceForPlayer}>Roll Dice (Player 2)</button>
+
+      {/* TODO: CHANGE TO ONLY RENDER WHEN A ROLLED SCORE IS PRESENT */}
+      {player1 && player2 && (
+        <div>
+          <div className="mt-6 text-center text-2xl text-gray-500 font-sans">
+            Score:
+          </div>
+          <div className="mt-6 text-center text-7xl text-gray-200 font-mono">
+            {/* TODO CHANGE TO CURRENT ROLL SCORE */}trips
+          </div>
+        </div>
+      )}
+
+      {player1 && player2 && (
+        <div className="absolute bottom-52 w-full flex justify-center items-center">
+          <div className="flex flex-col items-center text-white">
+            <p>
+              {/* TODO: CHANGE TO CURRENT PLAYER */}
+              {player1}
+              <span className="text-gray-500 font-sans">&apos;s turn:</span>
+            </p>
+            <button
+              type="button"
+              className="mt-2 rounded-full px-24 py-3 text-sm font-semibold shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4fadca] animate-gradientFlow font-sans"
+            >
+              Throw Dice
+            </button>
+          </div>
+        </div>
       )}
 
       {!player1 && !player2 && (
