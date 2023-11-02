@@ -194,13 +194,13 @@ export default function TwoPlayer() {
             Score:
           </div>
           <div className="mt-6 text-center text-7xl text-gray-200 font-mono">
-            {/* TODO CHANGE TO CURRENT ROLL SCORE */}trips
+            {/* TODO CHANGE TO CURRENT ROLL SCORE */}4
           </div>
         </div>
       )}
 
       {player1 && player2 && (
-        <div className="absolute bottom-52 w-full flex justify-center items-center">
+        <div className="absolute bottom-28 w-full flex justify-center items-center">
           <div className="flex flex-col items-center text-white">
             <p>
               {/* TODO: CHANGE TO CURRENT PLAYER */}
