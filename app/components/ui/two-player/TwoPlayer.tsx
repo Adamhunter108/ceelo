@@ -18,14 +18,24 @@ export default function TwoPlayer() {
 
   const [rolls, setRolls] = useState<number[]>(aRollOfTheDice());
 
-  const [rollsPlayer1, setRollsPlayer1] = useState<number[]>([]);
-  const [rollsPlayer2, setRollsPlayer2] = useState<number[]>([]);
+  const getRandomDiceRolls = (): number[] => {
+    return Array.from({ length: 3 }, () => Math.floor(Math.random() * 6) + 1);
+  };
+
+  const [rollsPlayer1, setRollsPlayer1] = useState<number[]>(
+    getRandomDiceRolls()
+  );
+  const [rollsPlayer2, setRollsPlayer2] = useState<number[]>(
+    getRandomDiceRolls()
+  );
+
   const [scorePlayer1, setScorePlayer1] = useState<number | null>(null);
   const [scorePlayer2, setScorePlayer2] = useState<number | null>(null);
   const [rollCountPlayer1, setRollCountPlayer1] = useState<number>(0);
   const [rollCountPlayer2, setRollCountPlayer2] = useState<number>(0);
   const [currentPlayer, setCurrentPlayer] = useState<string | null>(null);
   const [winner, setWinner] = useState<string | null>(null);
+
   const rollDiceForPlayer = () => {
     const newRolls = aRollOfTheDice();
     const newScore = findScore(newRolls);
@@ -61,6 +71,8 @@ export default function TwoPlayer() {
     // This function will set the 'winner' state variable accordingly
     // TODO: Implement the winner determination logic
   };
+
+  console.log(currentPlayer);
 
   return (
     <div>
@@ -113,7 +125,13 @@ export default function TwoPlayer() {
                       value={player1}
                       className="block w-full rounded-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#4FADCA] sm:text-sm sm:leading-6"
                       placeholder="Snoopy"
-                      onChange={(e) => setPlayer1(e.target.value)}
+                      onChange={(e) => {
+                        const enteredName = e.target.value;
+                        setPlayer1(enteredName);
+                        if (enteredName && player2) {
+                          setCurrentPlayer(player1);
+                        }
+                      }}
                     />
                   </div>
                   <div className="relative mt-6">
@@ -153,37 +171,41 @@ export default function TwoPlayer() {
         <div className="mt-4 flex justify-center space-x-16">
           <div className="flex flex-col items-center">
             <p className="font-sans text-gray-500 text-lg">Player 1</p>
-            <p className="-mt-2 text-white text-3xl -rotate-6 pb-2">
-              {player1}
-            </p>
+            <p className="-mt-2 text-white text-3xl -rotate-6">{player1}</p>
+            {/* TODO: Change to player1 score */}
+            <p className="pt-1 font-sans text-gray-300 text-2xl">5</p>
           </div>
           <div className="flex flex-col items-center">
             <p className="font-sans text-gray-500 text-lg">Player 2</p>
             <p className="-mt-2 text-white text-3xl -rotate-6">{player2}</p>
+            {/* TODO: Change to player2 score */}
+            <p className="pt-2 font-sans text-gray-300 text-2xl">3</p>
           </div>
         </div>
       )}
 
       {player1 && player2 && (
         <div className="mt-10 flex justify-center space-x-4">
-          {rolls.map((roll, idx) => {
-            switch (roll) {
-              case 1:
-                return <One key={idx} />;
-              case 2:
-                return <Two key={idx} />;
-              case 3:
-                return <Three key={idx} />;
-              case 4:
-                return <Four key={idx} />;
-              case 5:
-                return <Five key={idx} />;
-              case 6:
-                return <Six key={idx} />;
-              default:
-                return null;
+          {(currentPlayer === player1 ? rollsPlayer1 : rollsPlayer2).map(
+            (roll, idx) => {
+              switch (roll) {
+                case 1:
+                  return <One key={idx} />;
+                case 2:
+                  return <Two key={idx} />;
+                case 3:
+                  return <Three key={idx} />;
+                case 4:
+                  return <Four key={idx} />;
+                case 5:
+                  return <Five key={idx} />;
+                case 6:
+                  return <Six key={idx} />;
+                default:
+                  return null;
+              }
             }
-          })}
+          )}
         </div>
       )}
 
@@ -210,6 +232,7 @@ export default function TwoPlayer() {
             <button
               type="button"
               className="mt-2 rounded-full px-24 py-3 text-sm font-semibold shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4fadca] animate-gradientFlow font-sans"
+              onClick={rollDiceForPlayer}
             >
               Throw Dice
             </button>
