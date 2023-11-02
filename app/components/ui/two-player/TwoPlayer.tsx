@@ -29,8 +29,12 @@ export default function TwoPlayer() {
     getRandomDiceRolls()
   );
 
-  const [scorePlayer1, setScorePlayer1] = useState<number | null>(null);
-  const [scorePlayer2, setScorePlayer2] = useState<number | null>(null);
+  const [scorePlayer1, setScorePlayer1] = useState<number | string | null>(
+    null
+  );
+  const [scorePlayer2, setScorePlayer2] = useState<number | string | null>(
+    null
+  );
   const [rollCountPlayer1, setRollCountPlayer1] = useState<number>(0);
   const [rollCountPlayer2, setRollCountPlayer2] = useState<number>(0);
   const [currentPlayer, setCurrentPlayer] = useState<string | null>(null);
@@ -41,17 +45,19 @@ export default function TwoPlayer() {
     const newScore = findScore(newRolls);
 
     const updateScoreAndSwitchPlayer = (
-      scoreSetter: React.Dispatch<React.SetStateAction<number | null>>,
+      scoreSetter: React.Dispatch<React.SetStateAction<number | string | null>>,
       rollCount: number,
       switchToPlayer: string | null
     ) => {
+      // Check if the player should finish their turn or got a special score
       if (
         rollCount === 2 ||
-        typeof newScore === "number" ||
-        newScore === null
+        newScore === "Cee Lo" ||
+        newScore === "trips" ||
+        newScore === "you lose"
       ) {
-        scoreSetter(typeof newScore === "string" ? 0 : newScore);
-        setCurrentPlayer(switchToPlayer);
+        scoreSetter(newScore); // Update the score with the exact result
+        setCurrentPlayer(switchToPlayer); // Switch to the next player
       }
     };
 
@@ -65,7 +71,6 @@ export default function TwoPlayer() {
       setRollCountPlayer2(rollCountPlayer2 + 1);
     }
   };
-
   const determineWinner = () => {
     // Logic to determine the winner based on scores and game rules
     // This function will set the 'winner' state variable accordingly
