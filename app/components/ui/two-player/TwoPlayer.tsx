@@ -222,7 +222,7 @@ export default function TwoPlayer() {
       )}
 
       {player1 && player2 && (
-        <div className="absolute bottom-28 w-full flex justify-center items-center">
+        <div className="absolute bottom-20 w-full flex justify-center items-center">
           <div className="flex flex-col items-center text-white">
             <p>
               {/* TODO: CHANGE TO CURRENT PLAYER */}
