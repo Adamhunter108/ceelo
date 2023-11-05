@@ -1,4 +1,5 @@
 "use client";
+
 import { Fragment, useState } from "react";
 import Link from "next/link";
 import { Dialog, Transition } from "@headlessui/react";
@@ -13,71 +14,19 @@ import { aRollOfTheDice, findScore } from "@/app/utils/diceUtils";
 export default function TwoPlayer() {
   const [open, setOpen] = useState<boolean>(false);
 
+  const [rolls, setRolls] = useState<number[]>(aRollOfTheDice());
+  const [score, setScore] = useState<string | null>(null);
+  const [hasRolled, setHasRolled] = useState<boolean>(false);
+
+  const handleRoll = () => {
+    const newRolls = aRollOfTheDice();
+    setRolls(newRolls);
+    setScore(findScore(newRolls));
+    setHasRolled(true);
+  };
+
   const [player1, setPlayer1] = useState<string>("");
   const [player2, setPlayer2] = useState<string>("");
-
-  const [rolls, setRolls] = useState<number[]>(aRollOfTheDice());
-
-  const getRandomDiceRolls = (): number[] => {
-    return Array.from({ length: 3 }, () => Math.floor(Math.random() * 6) + 1);
-  };
-
-  const [rollsPlayer1, setRollsPlayer1] = useState<number[]>(
-    getRandomDiceRolls()
-  );
-  const [rollsPlayer2, setRollsPlayer2] = useState<number[]>(
-    getRandomDiceRolls()
-  );
-
-  const [scorePlayer1, setScorePlayer1] = useState<number | string | null>(
-    null
-  );
-  const [scorePlayer2, setScorePlayer2] = useState<number | string | null>(
-    null
-  );
-  const [rollCountPlayer1, setRollCountPlayer1] = useState<number>(0);
-  const [rollCountPlayer2, setRollCountPlayer2] = useState<number>(0);
-  const [currentPlayer, setCurrentPlayer] = useState<string | null>(null);
-  const [winner, setWinner] = useState<string | null>(null);
-
-  const rollDiceForPlayer = () => {
-    const newRolls = aRollOfTheDice();
-    const newScore = findScore(newRolls);
-
-    const updateScoreAndSwitchPlayer = (
-      scoreSetter: React.Dispatch<React.SetStateAction<number | string | null>>,
-      rollCount: number,
-      switchToPlayer: string | null
-    ) => {
-      // Check if the player should finish their turn or got a special score
-      if (
-        rollCount === 2 ||
-        newScore === "Cee Lo" ||
-        newScore === "trips" ||
-        newScore === "you lose"
-      ) {
-        scoreSetter(newScore); // Update the score with the exact result
-        setCurrentPlayer(switchToPlayer); // Switch to the next player
-      }
-    };
-
-    if (currentPlayer === player1) {
-      setRollsPlayer1(newRolls);
-      updateScoreAndSwitchPlayer(setScorePlayer1, rollCountPlayer1, player2);
-      setRollCountPlayer1(rollCountPlayer1 + 1);
-    } else {
-      setRollsPlayer2(newRolls);
-      updateScoreAndSwitchPlayer(setScorePlayer2, rollCountPlayer2, null);
-      setRollCountPlayer2(rollCountPlayer2 + 1);
-    }
-  };
-  const determineWinner = () => {
-    // Logic to determine the winner based on scores and game rules
-    // This function will set the 'winner' state variable accordingly
-    // TODO: Implement the winner determination logic
-  };
-
-  console.log(currentPlayer);
 
   return (
     <div>
@@ -129,14 +78,8 @@ export default function TwoPlayer() {
                       id="player1"
                       value={player1}
                       className="block w-full rounded-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#4FADCA] sm:text-sm sm:leading-6"
-                      placeholder="Snoopy"
-                      onChange={(e) => {
-                        const enteredName = e.target.value;
-                        setPlayer1(enteredName);
-                        if (enteredName && player2) {
-                          setCurrentPlayer(player1);
-                        }
-                      }}
+                      placeholder="Your name"
+                      onChange={(e) => setPlayer1(e.target.value)}
                     />
                   </div>
                   <div className="relative mt-6">
@@ -152,7 +95,7 @@ export default function TwoPlayer() {
                       id="player2"
                       value={player2}
                       className="block w-full rounded-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#4FADCA] sm:text-sm sm:leading-6"
-                      placeholder="Charlie Brown"
+                      placeholder="Your homie's name"
                       onChange={(e) => setPlayer2(e.target.value)}
                     />
                   </div>
@@ -190,9 +133,9 @@ export default function TwoPlayer() {
       )}
 
       {player1 && player2 && (
-        <div className="mt-10 flex justify-center space-x-4">
-          {(currentPlayer === player1 ? rollsPlayer1 : rollsPlayer2).map(
-            (roll, idx) => {
+        <div className="text-center mt-10">
+          <div className="flex justify-center space-x-4">
+            {rolls.map((roll, idx) => {
               switch (roll) {
                 case 1:
                   return <One key={idx} />;
@@ -209,20 +152,18 @@ export default function TwoPlayer() {
                 default:
                   return null;
               }
-            }
+            })}
+          </div>
+          {hasRolled && score && (
+            <div>
+              <div className="mt-6 text-center text-2xl text-gray-500 font-sans">
+                Score:
+              </div>
+              <div className="mt-6 text-center text-7xl text-gray-200 font-mono">
+                {score}
+              </div>
+            </div>
           )}
-        </div>
-      )}
-
-      {/* TODO: CHANGE TO ONLY RENDER WHEN A ROLLED SCORE IS PRESENT */}
-      {player1 && player2 && (
-        <div>
-          <div className="mt-6 text-center text-2xl text-gray-500 font-sans">
-            Score:
-          </div>
-          <div className="mt-6 text-center text-7xl text-gray-200 font-mono">
-            {/* TODO CHANGE TO CURRENT ROLL SCORE */}4
-          </div>
         </div>
       )}
 
@@ -237,7 +178,7 @@ export default function TwoPlayer() {
             <button
               type="button"
               className="mt-2 rounded-full px-24 py-3 text-sm font-semibold shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4fadca] animate-gradientFlow font-sans"
-              onClick={rollDiceForPlayer}
+              onClick={handleRoll}
             >
               Throw Dice
             </button>
