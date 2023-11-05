@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import Link from "next/link";
 import { Dialog, Transition } from "@headlessui/react";
 import One from "../../die-sides/One";
@@ -14,6 +14,9 @@ import { aRollOfTheDice, findScore } from "@/app/utils/diceUtils";
 export default function TwoPlayer() {
   const [open, setOpen] = useState<boolean>(false);
 
+  const [player1, setPlayer1] = useState<string>("");
+  const [player2, setPlayer2] = useState<string>("");
+
   const [rolls, setRolls] = useState<number[]>(aRollOfTheDice());
   const [score, setScore] = useState<string | null>(null);
   const [hasRolled, setHasRolled] = useState<boolean>(false);
@@ -21,6 +24,13 @@ export default function TwoPlayer() {
   const [player1Score, setPlayer1Score] = useState<string | null>(null);
   const [player2Score, setPlayer2Score] = useState<string | null>(null);
   const [gameOver, setGameOver] = useState<boolean>(false);
+  const [winner, setWinner] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (gameOver) {
+      findWinner();
+    }
+  }, [gameOver]);
 
   const handleRoll = () => {
     const newRolls = aRollOfTheDice();
@@ -39,18 +49,44 @@ export default function TwoPlayer() {
       ) {
         setGameOver(true);
       }
-    } else if (!player2Score) {
+    } else if (!player2Score && newScore !== null) {
       setPlayer2Score(newScore);
       setGameOver(true);
     }
   };
 
-  const [player1, setPlayer1] = useState<string>("");
-  const [player2, setPlayer2] = useState<string>("");
+  const playAgain = () => {
+    if (gameOver) {
+      setPlayer1Score(null),
+        setPlayer2Score(null),
+        setScore(null),
+        setGameOver(false),
+        setWinner(null);
+    }
+  };
 
-  //   console.log("score: ", score);
-  //   console.log("player1Score: ", player1Score);
-  //   console.log("player2Score: ", player2Score);
+  const findWinner = () => {
+    if (gameOver) {
+      if (player1Score === "you lose") {
+        setWinner(player2);
+      } else if (
+        player2Score !== null &&
+        player1Score !== null &&
+        player1Score > player2Score
+      ) {
+        setWinner(player1);
+      } else if (
+        player1Score !== null &&
+        player2Score !== null &&
+        player1Score === player2Score
+      ) {
+        setWinner("Nobody");
+      } else {
+        setWinner(player2);
+      }
+    }
+  };
+
   return (
     <div>
       <div className="mt-6 ml-4">
@@ -192,7 +228,7 @@ export default function TwoPlayer() {
         </div>
       )}
 
-      {player1 && player2 && (
+      {player1 && player2 && gameOver == false && (
         <div className="absolute bottom-20 w-full flex justify-center items-center">
           <div className="flex flex-col items-center text-white">
             <p>
@@ -201,10 +237,28 @@ export default function TwoPlayer() {
             </p>
             <button
               type="button"
-              className="mt-2 rounded-full px-24 py-3 text-sm font-semibold shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4fadca] animate-gradientFlow font-sans"
+              className="mt-2 rounded-full px-24 py-3 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4fadca] animate-gradientFlow font-sans"
               onClick={handleRoll}
             >
               Throw Dice
+            </button>
+          </div>
+        </div>
+      )}
+
+      {gameOver && (
+        <div className="absolute bottom-20 w-full flex justify-center items-center">
+          <div className="flex flex-col items-center text-white">
+            <p className="text-3xl animate-pulse">
+              {winner}
+              <span className="text-gray-300 font-sans"> wins!</span>
+            </p>
+            <button
+              type="button"
+              className="mt-2 rounded-full px-24 py-3 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4fadca] animate-gradientFlow font-sans"
+              onClick={playAgain}
+            >
+              Play Again
             </button>
           </div>
         </div>
@@ -214,7 +268,7 @@ export default function TwoPlayer() {
         <div className="absolute bottom-64 w-full flex justify-center items-center">
           <button
             type="button"
-            className="rounded-full px-24 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4fadca] animate-gradientFlow font-sans"
+            className="rounded-full px-24 py-3 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4fadca] animate-gradientFlow font-sans"
             onClick={() => setOpen(true)}
           >
             Start 2 Player Game
