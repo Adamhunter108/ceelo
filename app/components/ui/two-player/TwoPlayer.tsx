@@ -18,16 +18,39 @@ export default function TwoPlayer() {
   const [score, setScore] = useState<string | null>(null);
   const [hasRolled, setHasRolled] = useState<boolean>(false);
 
+  const [player1Score, setPlayer1Score] = useState<string | null>(null);
+  const [player2Score, setPlayer2Score] = useState<string | null>(null);
+  const [gameOver, setGameOver] = useState<boolean>(false);
+
   const handleRoll = () => {
     const newRolls = aRollOfTheDice();
+    const newScore = findScore(newRolls);
     setRolls(newRolls);
     setScore(findScore(newRolls));
     setHasRolled(true);
+
+    if (!player1Score) {
+      setPlayer1Score(newScore);
+
+      if (
+        newScore === "you lose" ||
+        newScore === "Cee Lo" ||
+        newScore === "trips"
+      ) {
+        setGameOver(true);
+      }
+    } else if (!player2Score) {
+      setPlayer2Score(newScore);
+      setGameOver(true);
+    }
   };
 
   const [player1, setPlayer1] = useState<string>("");
   const [player2, setPlayer2] = useState<string>("");
 
+  //   console.log("score: ", score);
+  //   console.log("player1Score: ", player1Score);
+  //   console.log("player2Score: ", player2Score);
   return (
     <div>
       <div className="mt-6 ml-4">
@@ -120,14 +143,16 @@ export default function TwoPlayer() {
           <div className="flex flex-col items-center">
             <p className="font-sans text-gray-500 text-lg">Player 1</p>
             <p className="-mt-2 text-white text-3xl -rotate-6">{player1}</p>
-            {/* TODO: Change to player1 score */}
-            <p className="pt-1 font-sans text-gray-300 text-2xl">5</p>
+            <p className="h-6 pt-1 font-sans text-gray-300 text-2xl">
+              {player1Score !== null ? `${player1Score}` : ""}
+            </p>
           </div>
           <div className="flex flex-col items-center">
             <p className="font-sans text-gray-500 text-lg">Player 2</p>
             <p className="-mt-2 text-white text-3xl -rotate-6">{player2}</p>
-            {/* TODO: Change to player2 score */}
-            <p className="pt-2 font-sans text-gray-300 text-2xl">3</p>
+            <p className="h-6 pt-1 font-sans text-gray-300 text-2xl">
+              {player2Score !== null ? `${player2Score}` : ""}
+            </p>
           </div>
         </div>
       )}
@@ -171,8 +196,7 @@ export default function TwoPlayer() {
         <div className="absolute bottom-20 w-full flex justify-center items-center">
           <div className="flex flex-col items-center text-white">
             <p>
-              {/* TODO: CHANGE TO CURRENT PLAYER */}
-              {player1}
+              {!player1Score ? `${player1}` : `${player2}`}
               <span className="text-gray-500 font-sans">&apos;s turn:</span>
             </p>
             <button
