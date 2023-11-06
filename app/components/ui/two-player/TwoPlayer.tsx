@@ -234,6 +234,15 @@ export default function TwoPlayer() {
         </div>
       )}
 
+      {winner && (
+        <div className="mt-16 flex flex-col items-center">
+          <p className="text-4xl md:text-7xl animate-pulse text-white">
+            {winner}
+            <span className="text-gray-300 font-sans"> wins!</span>
+          </p>
+        </div>
+      )}
+
       {player1 && player2 && gameOver == false && (
         <div className="absolute bottom-20 w-full flex justify-center items-center">
           <div className="flex flex-col items-center text-white">
@@ -255,10 +264,6 @@ export default function TwoPlayer() {
       {gameOver && (
         <div className="absolute bottom-20 w-full flex justify-center items-center">
           <div className="flex flex-col items-center text-white">
-            <p className="text-3xl animate-pulse">
-              {winner}
-              <span className="text-gray-300 font-sans"> wins!</span>
-            </p>
             <button
               type="button"
               className="mt-2 rounded-full px-24 py-3 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4fadca] animate-gradientFlow font-sans"
