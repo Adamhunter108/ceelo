@@ -235,7 +235,7 @@ export default function TwoPlayer() {
       )}
 
       {winner && (
-        <div className="mt-16 flex flex-col items-center">
+        <div className="mt-10 flex flex-col items-center">
           <p className="text-4xl md:text-7xl animate-pulse text-white">
             {winner}
             <span className="text-gray-300 font-sans"> wins!</span>
