@@ -4,8 +4,22 @@
 
 ## ℹ️ About:
 
-- A Cee Lo web app
-- There are two game modes: `Free Throw` & `2 Players`
+- A Cee Lo web-app
+    <details>
+      <summary>
+      🤔 What is Cee Lo?
+      </summary>
+      <a href="https://en.wikipedia.org/wiki/Cee-lo">Cee Lo</a> (pronounced "See Low") is a game played with three six-sided dice.  The name comes from the Chinese Sì-Wŭ-Liù (四五六), meaning "four-five-six" and rolling a 4, 5, 6 is the goal.
+      </details>
+      <br>
+    <details>
+        <summary>
+        📋 How to play
+        </summary>
+        Each player rolls all three dice at once.  If two dice are the same number, the player's score for that round is the value of the third die.  If no doubles are found, you roll again.  <br>Special rolls:<br><ul><li>4, 5, 6 is Cee Lo and is an automatic win.</li><li>Three of a kind (aka "trips") is also an automatic win.</li><li>1, 2, 3 is an automatic loss.</li></ul>
+    </details>
+    <br>
+- There are two game modes: `2 Players` & `Free Throw`
 
 ## Live Deployment:
 
