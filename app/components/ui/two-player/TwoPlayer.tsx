@@ -185,14 +185,30 @@ export default function TwoPlayer() {
           <div className="flex flex-col items-center">
             <p className="font-sans text-gray-500 text-lg">Player 1</p>
             <p className="-mt-2 text-white text-3xl -rotate-6">{player1}</p>
-            <p className="h-6 pt-1 font-sans text-gray-300 text-2xl">
+            <p
+              className={`h-6 pt-1 font-sans ${
+                winner === player1
+                  ? "text-green-500"
+                  : winner === player2 || player1Score === "you lose"
+                  ? "text-red-500"
+                  : "text-gray-300"
+              } text-2xl`}
+            >
               {player1Score !== null ? `${player1Score}` : ""}
             </p>
           </div>
           <div className="flex flex-col items-center">
             <p className="font-sans text-gray-500 text-lg">Player 2</p>
             <p className="-mt-2 text-white text-3xl -rotate-6">{player2}</p>
-            <p className="h-6 pt-1 font-sans text-gray-300 text-2xl">
+            <p
+              className={`h-6 pt-1 font-sans ${
+                winner === player2
+                  ? "text-green-500"
+                  : winner === player1 || player2Score === "you lose"
+                  ? "text-red-500"
+                  : "text-gray-300"
+              } text-2xl`}
+            >
               {player2Score !== null ? `${player2Score}` : ""}
             </p>
           </div>
@@ -226,7 +242,7 @@ export default function TwoPlayer() {
               <div className="mt-6 text-center text-2xl text-gray-500 font-sans">
                 Score:
               </div>
-              <div className="mt-6 text-center text-7xl text-gray-200 font-mono">
+              <div className="mt-4 text-center text-3xl md:text-7xl text-gray-200 font-mono">
                 {score}
               </div>
             </div>

@@ -9,29 +9,6 @@ export default function ChooseGameMode() {
   return (
     <div>
       <div className="flex justify-center space-x-4 md:space-x-6">
-        {selectedGameMode === "freeThrow" ? (
-          <div className="w-28 md:w-36 h-28 md:h-36">
-            <ChooseGameSelectionRing>
-              <button
-                onClick={() => setSelectedGameMode("freeThrow")}
-                className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold font-sans"
-              >
-                Free Throw
-              </button>
-            </ChooseGameSelectionRing>
-          </div>
-        ) : (
-          <div className="w-28 md:w-36 h-28 md:h-36">
-            <ChooseGameSelectionRingHolder>
-              <button
-                onClick={() => setSelectedGameMode("freeThrow")}
-                className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold font-sans"
-              >
-                Free Throw
-              </button>
-            </ChooseGameSelectionRingHolder>
-          </div>
-        )}
         {selectedGameMode === "twoPlayers" ? (
           <div className="w-28 md:w-36 h-28 md:h-36">
             <ChooseGameSelectionRing>
@@ -51,6 +28,29 @@ export default function ChooseGameMode() {
                 className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold font-sans"
               >
                 2 Players
+              </button>
+            </ChooseGameSelectionRingHolder>
+          </div>
+        )}
+        {selectedGameMode === "freeThrow" ? (
+          <div className="w-28 md:w-36 h-28 md:h-36">
+            <ChooseGameSelectionRing>
+              <button
+                onClick={() => setSelectedGameMode("freeThrow")}
+                className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold font-sans"
+              >
+                Free Throw
+              </button>
+            </ChooseGameSelectionRing>
+          </div>
+        ) : (
+          <div className="w-28 md:w-36 h-28 md:h-36">
+            <ChooseGameSelectionRingHolder>
+              <button
+                onClick={() => setSelectedGameMode("freeThrow")}
+                className="bg-[#4FADCA] w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center text-white font-semi-bold font-sans"
+              >
+                Free Throw
               </button>
             </ChooseGameSelectionRingHolder>
           </div>

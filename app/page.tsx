@@ -8,7 +8,7 @@ export default function Home() {
     <main className="bg-gray-800">
       <div className="flex justify-center">
         <img
-          src="/img/logos/ceelo-logo-1.png"
+          src="/img/logos/ceelo-logo-1-stroke.png"
           className="w-96"
           alt="Cee Lo logo"
         />
