@@ -69,6 +69,12 @@ export default function TwoPlayer() {
     if (gameOver) {
       if (player1Score === "you lose") {
         setWinner(player2);
+      } else if (player2Score === "you lose") {
+        setWinner(player1);
+      } else if (player1Score === "Cee Lo" || player1Score === "trips") {
+        setWinner(player1);
+      } else if (player2Score === "Cee Lo" || player2Score === "trips") {
+        setWinner(player2);
       } else if (
         player2Score !== null &&
         player1Score !== null &&
