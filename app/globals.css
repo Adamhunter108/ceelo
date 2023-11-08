@@ -63,3 +63,32 @@ body {
   );
   background-size: 200% 200%;
 }
+
+@keyframes scaleUpAndRotate {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.25) rotate(90deg);
+  }
+  100% {
+    transform: scale(1.25) rotate(180deg);
+  }
+}
+
+.animate-scale-up-and-rotate {
+  animation: scaleUpAndRotate 700ms ease-in-out;
+}
+
+@keyframes scaleUpAndRotateForwards {
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    transform: scale(1.25) rotate(180deg);
+  }
+}
+
+.animate-scale-up-and-rotate-forwards {
+  animation: scaleUpAndRotateForwards 700ms ease-in-out forwards;
+}

@@ -2,9 +2,9 @@
 
 import { randomRotateClass } from "../../utils/diceUtils";
 
-export default function Two() {
+export default function Two({ className = "" }) {
   return (
-    <div className="">
+    <div className={`${className}`}>
       <div
         className={`outline outline-2 h-24 w-24 md:h-32 md:w-32 lg:h-36 lg:w-36 bg-gray-200 rounded-2xl shadow-2xl transform p-4 hover:scale-150 transition duration-700 hover:rotate-180 hover:shadow-2xl ${randomRotateClass()}`}
       >

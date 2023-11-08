@@ -34,19 +34,25 @@ export default function FreeThrow() {
       <div className="text-center mt-10">
         <div className="flex justify-center space-x-4">
           {rolls.map((roll, idx) => {
+            const isScoreDie =
+              score === roll.toString() &&
+              rolls.filter((r) => r === roll).length === 1;
+            const scoreDieClass = isScoreDie
+              ? "animate-scale-up-and-rotate-forwards"
+              : "animate-scale-up-and-rotate";
             switch (roll) {
               case 1:
-                return <One key={idx} />;
+                return <One key={idx} className={scoreDieClass} />;
               case 2:
-                return <Two key={idx} />;
+                return <Two key={idx} className={scoreDieClass} />;
               case 3:
-                return <Three key={idx} />;
+                return <Three key={idx} className={scoreDieClass} />;
               case 4:
-                return <Four key={idx} />;
+                return <Four key={idx} className={scoreDieClass} />;
               case 5:
-                return <Five key={idx} />;
+                return <Five key={idx} className={scoreDieClass} />;
               case 6:
-                return <Six key={idx} />;
+                return <Six key={idx} className={scoreDieClass} />;
               default:
                 return null;
             }
