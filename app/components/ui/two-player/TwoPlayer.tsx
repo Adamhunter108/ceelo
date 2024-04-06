@@ -26,6 +26,45 @@ export default function TwoPlayer() {
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [winner, setWinner] = useState<string | null>(null);
 
+  const [delayedScore, setDelayedScore] = useState<string | null>(null);
+  const [delayedPlayer1Score, setDelayedPlayer1Score] = useState<string | null>(
+    null
+  );
+  const [delayedPlayer2Score, setDelayedPlayer2Score] = useState<string | null>(
+    null
+  );
+  const [delayedWinner, setDelayedWinner] = useState<string | null>(null);
+
+  useEffect(() => {
+    setDelayedScore(null);
+    setDelayedPlayer1Score(null);
+    setDelayedPlayer2Score(null);
+    setDelayedWinner(null);
+
+    const scoreTimer = score
+      ? setTimeout(() => setDelayedScore(score), 500)
+      : null;
+
+    const player1ScoreTimer = player1Score
+      ? setTimeout(() => setDelayedPlayer1Score(player1Score), 500)
+      : null;
+
+    const player2ScoreTimer = player2Score
+      ? setTimeout(() => setDelayedPlayer2Score(player2Score), 500)
+      : null;
+
+    const winnerTimer = winner
+      ? setTimeout(() => setDelayedWinner(winner), 800)
+      : null;
+
+    return () => {
+      if (scoreTimer) clearTimeout(scoreTimer);
+      if (player1ScoreTimer) clearTimeout(player1ScoreTimer);
+      if (player2ScoreTimer) clearTimeout(player2ScoreTimer);
+      if (winnerTimer) clearTimeout(winnerTimer);
+    };
+  }, [score, player1Score, player2Score, winner]);
+
   useEffect(() => {
     if (gameOver) {
       findWinner();
@@ -209,7 +248,7 @@ export default function TwoPlayer() {
                   : "text-gray-300"
               } text-2xl`}
             >
-              {player2Score !== null ? `${player2Score}` : ""}
+              {delayedPlayer2Score !== null ? `${delayedPlayer2Score}` : ""}
             </p>
           </div>
         </div>
@@ -249,18 +288,18 @@ export default function TwoPlayer() {
                 Score:
               </div>
               <div className="mt-4 text-center text-3xl md:text-7xl text-gray-200 font-mono">
-                {score}
+                {delayedScore}
               </div>
             </div>
           )}
         </div>
       )}
 
-      {winner && (
-        <div className="mt-10 flex flex-col items-center">
+      {delayedWinner && (
+        <div className="mt-16 flex flex-col items-center">
           <p className="text-4xl md:text-7xl animate-pulse text-white">
-            {winner}
-            <span className="text-gray-300 font-sans"> wins!</span>
+            {delayedWinner}
+            <span className="text-gray-300 text-3xl md:text-6xl"> wins!</span>
           </p>
         </div>
       )}

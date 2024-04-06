@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import One from "../../die-sides/One";
 import Two from "../../die-sides/Two";
@@ -14,6 +14,19 @@ export default function FreeThrow() {
   const [rolls, setRolls] = useState<number[]>(aRollOfTheDice());
   const [score, setScore] = useState<string | null>(null);
   const [hasRolled, setHasRolled] = useState<boolean>(false);
+  const [delayedScore, setDelayedScore] = useState<string | null>(null);
+
+  useEffect(() => {
+    setDelayedScore(null);
+
+    const scoreTimer = score
+      ? setTimeout(() => setDelayedScore(score), 500)
+      : null;
+
+    return () => {
+      if (scoreTimer) clearTimeout(scoreTimer);
+    };
+  }, [score]);
 
   const handleRoll = () => {
     const newRolls = aRollOfTheDice();
@@ -64,7 +77,7 @@ export default function FreeThrow() {
               Score:
             </div>
             <div className="mt-6 text-center text-7xl text-gray-200 font-mono">
-              {score}
+              {delayedScore}
             </div>
           </div>
         )}
