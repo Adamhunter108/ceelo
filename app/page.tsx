@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Four from "./components/die-sides/Four";
 import Five from "./components/die-sides/Five";
 import Six from "./components/die-sides/Six";
@@ -6,6 +7,15 @@ import ChooseGameMode from "./components/ui/home/ChooseGameMode";
 export default function Home() {
   return (
     <main className="bg-gray-800">
+      <Link href="/about">
+        <div className="pt-2 flex justify-center -mb-14 ml-64">
+          <img
+            src="/img/logos/ceelo-info-white-i.png"
+            className="w-12 relative z-60 hover:rotate-[360deg] transition duration-700"
+            alt="Cee Lo info"
+          />
+        </div>
+      </Link>
       <div className="flex justify-center">
         <img
           src="/img/logos/ceelo-logo-1-stroke.png"
