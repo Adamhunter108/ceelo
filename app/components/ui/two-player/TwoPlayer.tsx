@@ -35,6 +35,19 @@ export default function TwoPlayer() {
   );
   const [delayedWinner, setDelayedWinner] = useState<string | null>(null);
 
+  const [rollCount, setRollCount] = useState<number>(0);
+
+  const [player1WinCount, setPlayer1WinCount] = useState<number>(0);
+  const [player2WinCount, setPlayer2WinCount] = useState<number>(0);
+  console.log(`Player 1 wins: ${player1WinCount}`);
+  console.log(`Player 2 wins: ${player2WinCount}`);
+  console.log(`This round's winner: ${winner}`);
+
+  useEffect(() => {
+    if (winner === player1) setPlayer1WinCount((prevCount) => prevCount + 1);
+    if (winner === player2) setPlayer2WinCount((prevCount) => prevCount + 1);
+  }, [winner]);
+
   useEffect(() => {
     setDelayedScore(null);
     setDelayedPlayer1Score(null);
@@ -80,7 +93,6 @@ export default function TwoPlayer() {
 
     if (!player1Score) {
       setPlayer1Score(newScore);
-
       if (
         newScore === "you lose" ||
         newScore === "Cee Lo" ||
@@ -224,6 +236,15 @@ export default function TwoPlayer() {
           <div className="flex flex-col items-center">
             <p className="font-sans text-gray-500 text-lg">Player 1</p>
             <p className="-mt-2 text-white text-3xl -rotate-6">{player1}</p>
+            {/* <p className="mt-2 font-sans text-gray-500 text-lg">
+              {player1WinCount !== 0 ? "Rounds won" : ""}
+            </p>
+            <p className="text-white">
+              {player1WinCount !== 0 ? `${player1WinCount}` : ""}
+            </p>
+            <p className="text-gray-500 font-sans">
+              {player1Score !== null ? "score" : ""}
+            </p> */}
             <p
               className={`h-6 pt-1 font-sans ${
                 winner === player1
@@ -239,6 +260,15 @@ export default function TwoPlayer() {
           <div className="flex flex-col items-center">
             <p className="font-sans text-gray-500 text-lg">Player 2</p>
             <p className="-mt-2 text-white text-3xl -rotate-6">{player2}</p>
+            {/* <p className="mt-2 font-sans text-gray-500 text-lg">
+              {player2WinCount !== 0 ? "Rounds won" : ""}
+            </p>
+            <p className="text-white">
+              {player2WinCount !== 0 ? `${player2WinCount}` : ""}
+            </p>
+            <p className="text-gray-500 font-sans">
+              {player2Score !== null ? "score" : ""}
+            </p> */}
             <p
               className={`h-6 pt-1 font-sans ${
                 winner === player2
